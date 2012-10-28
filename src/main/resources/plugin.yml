@@ -1,0 +1,7 @@
+name: Maplet
+main: net.apunch.maplet.Maplet
+authors: [aPunch]
+version: 1.0
+commands:
+  map:
+    description: Various map-related commands
