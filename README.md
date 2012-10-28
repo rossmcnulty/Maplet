@@ -19,7 +19,7 @@ Credits
 
 Source
 ------
-The latest updated source code for Maplet can be found on [https://github.com/aPunch/Maplet].  
+The latest updated source code for Maplet can be found on [here](https://github.com/aPunch/Maplet).
 
 License
 -------
@@ -29,5 +29,5 @@ Compiling
 ---------
 Maplet uses Maven to handle its dependencies.
 
-* Install [Maven 2 or 3](http://maven.apache.org/download.html)  
+* Install [Maven 2 or 3](http://maven.apache.org/download.html)
 * Checkout this repository and run: `mvn clean package install`
