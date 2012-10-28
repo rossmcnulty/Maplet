@@ -19,7 +19,7 @@ Credits
 
 Source
 ------
-The latest updated source code for Maplet can be found on [here](https://github.com/aPunch/Maplet).
+The latest updated source code for Maplet can be found [here](https://github.com/aPunch/Maplet).
 
 License
 -------
