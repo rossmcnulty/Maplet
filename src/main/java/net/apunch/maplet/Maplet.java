@@ -60,13 +60,6 @@ public final class Maplet extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        // TEST APPLICATIONS TODO automatically load applications from sub-directory
-        /*
-         * applications.put("Messages", new MessagingApp()); applications.put("Angry Birds", new
-         * TestApp("Angry Birds")); applications.put("Music", new TestApp("Music")); applications.put("Recipes", new
-         * TestApp("Recipes")); applications.put("Plants vs. Zombies", new TestApp("Plants vs. Zombies"));
-         * applications.put("Settings", new TestApp("Settings"));
-         */
         loadApplications();
 
         getServer().getPluginManager().registerEvents(this, this);
@@ -239,7 +232,7 @@ public final class Maplet extends JavaPlugin implements Listener {
     }
 
     private void loadApplications() {
-        File applicationDirectory = new File(ROOT_DIRECTORY + "applications/");
+        File applicationDirectory = new File(ROOT_DIRECTORY + "applications");
         if (applicationDirectory.exists()) {
             File[] files = applicationDirectory.listFiles();
             int found = 0;
