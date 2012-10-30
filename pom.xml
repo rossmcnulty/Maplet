@@ -32,6 +32,17 @@
 		</dependency>
 	</dependencies>
 
+	<!-- Build Management -->
+	<ciManagement>
+		<system>jenkins</system>
+		<url>http://ci.citizensnpcs.com</url>
+	</ciManagement>
+	<scm>
+		<connection>scm:git:git://github.com/aPunch/Maplet.git</connection>
+		<developerConnection>scm:git:git:@github.com:aPunch/Maplet.git</developerConnection>
+		<url>https://github.com/aPunch/Maplet/tree/master/</url>
+	</scm>
+
 	<!-- Build Information -->
 	<build>
 		<plugins>
