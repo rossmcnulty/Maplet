@@ -32,13 +32,13 @@ public final class Circle extends Shape {
     }
 
     @Override
-    public boolean intersects(int x, int y) {
-        double distance = Math.pow((centerX - x), 2) + Math.pow((centerY - y), 2);
-        return distance < Math.pow(radius, 2);
+    public void draw(Map map) {
+        // TODO
     }
 
     @Override
-    public void render(Map map) {
-        // TODO
+    public boolean intersects(int x, int y) {
+        double distance = Math.pow((centerX - x), 2) + Math.pow((centerY - y), 2);
+        return distance < Math.pow(radius, 2);
     }
 }

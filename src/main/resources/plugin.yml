@@ -1,6 +1,6 @@
 name: Maplet
 main: net.apunch.maplet.Maplet
-authors: [aPunch]
+authors: [aPunch, fullwall]
 version: 1.0
 commands:
   map:

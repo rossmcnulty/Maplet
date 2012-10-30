@@ -4,15 +4,21 @@ import net.apunch.maplet.api.Map;
 import net.apunch.maplet.api.MapColor;
 
 public abstract class Button extends SelectableAttachment {
-    private final String text;
+    private final Label label;
 
     protected Button(int x, int y, String text) {
         super(x, y);
-        this.text = text;
+        label = new Label(text, x, y, MapColor.GRAY);
+        addAttachment(label);
     }
 
     @Override
-    public void render(Map map) {
-        map.drawText(text, x, y, selected ? MapColor.FOREST_GREEN : MapColor.DARK_GRAY);
+    public void onDeselect(Map map) {
+        label.setColor(MapColor.GRAY);
+    }
+
+    @Override
+    public void onSelect(Map map) {
+        label.setColor(MapColor.GREEN);
     }
 }

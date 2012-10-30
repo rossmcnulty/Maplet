@@ -47,7 +47,7 @@ public final class Maplet extends JavaPlugin implements Listener {
         if (args.length == 1 && args[0].equalsIgnoreCase("create")) {
             ItemStack map = new ItemStack(Material.MAP, 1, getServer().createMap(player.getWorld()).getId());
             player.getInventory().addItem(map);
-            createMap(map).addViewer(player);
+            createMap(map);
             player.sendMessage("Created map with id '" + map.getDurability() + "'.");
         }
         return true;
@@ -64,7 +64,7 @@ public final class Maplet extends JavaPlugin implements Listener {
 
         getServer().getPluginManager().registerEvents(this, this);
 
-        getServer().getScheduler().scheduleAsyncRepeatingTask(this, new Runnable() {
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 
             @Override
             public void run() {
@@ -72,7 +72,7 @@ public final class Maplet extends JavaPlugin implements Listener {
                     map.render();
                 }
             }
-        }, 0L, 1L);
+        }, 0L, 5L);
 
         log(toString() + " enabled.");
     }
@@ -93,7 +93,7 @@ public final class Maplet extends JavaPlugin implements Listener {
     public void onItemHeldChange(PlayerItemHeldEvent event) {
         Player player = event.getPlayer();
         ItemStack newItem = player.getInventory().getItem(event.getNewSlot());
-        if (newItem != null && newItem.getType() == Material.MAP) {
+        if (isMap(newItem)) {
             Map map = getMap(newItem.getDurability());
             if (map != null && !map.isViewer(player)) {
                 map.addViewer(player);
@@ -101,7 +101,7 @@ public final class Maplet extends JavaPlugin implements Listener {
         }
 
         ItemStack oldItem = player.getInventory().getItem(event.getPreviousSlot());
-        if (oldItem != null && oldItem.getType() == Material.MAP) {
+        if (isMap(oldItem)) {
             Map map = getMap(oldItem.getDurability());
             if (map != null && map.isViewer(player)) {
                 map.removeViewer(player);
@@ -112,7 +112,7 @@ public final class Maplet extends JavaPlugin implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         ItemStack hand = event.getItem();
-        if (hand != null && hand.getType() == Material.MAP) {
+        if (isMap(hand)) {
             getMap(hand.getDurability()).cycleSelected(event.getAction());
             event.setCancelled(true);
         }
@@ -122,7 +122,7 @@ public final class Maplet extends JavaPlugin implements Listener {
     public void onPlayerToggleSneak(PlayerToggleSneakEvent event) {
         if (!event.isCancelled() && event.isSneaking()) {
             ItemStack hand = event.getPlayer().getItemInHand();
-            if (hand != null && hand.getType() == Material.MAP) {
+            if (isMap(hand)) {
                 Map map = getMap(hand.getDurability());
                 Menu activeMenu = map.getActiveMenu();
                 if (activeMenu != null) {
@@ -226,6 +226,17 @@ public final class Maplet extends JavaPlugin implements Listener {
      */
     public static Map getMap(short id) {
         return maps.get(id);
+    }
+
+    /**
+     * Gets whether the given item is a registered map.
+     * 
+     * @param item
+     *            ItemStack to check
+     * @return True if the given item is a registered map.
+     */
+    public static boolean isMap(ItemStack item) {
+        return item != null && item.getType() == Material.MAP && maps.containsKey(item.getDurability());
     }
 
     public static void log(Level level, String message) {

@@ -1,12 +1,12 @@
 package net.apunch.maplet.api.shape;
 
 import net.apunch.maplet.api.MapColor;
-import net.apunch.maplet.api.attachment.Attachable;
+import net.apunch.maplet.api.attachment.Attachment;
 
 /**
- * Represents a shape that can either be attached to a map directly or used to construct other {@link Attachable}s.
+ * Represents a shape that can either be attached to a map directly or used to construct other {@link Attachment}s.
  */
-public abstract class Shape extends Attachable {
+public abstract class Shape extends Attachment {
     protected MapColor color = MapColor.DARK_GRAY;
 
     public Shape() {
@@ -35,5 +35,6 @@ public abstract class Shape extends Attachable {
      */
     public void setBorderColor(MapColor color) {
         this.color = color;
+        setDirty(true);
     }
 }

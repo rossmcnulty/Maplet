@@ -6,7 +6,7 @@ import net.apunch.maplet.api.Map;
  * Represents an attachment that can be selected. When selected, this attachment will be bordered by a yellow outline on
  * the map.
  */
-public abstract class SelectableAttachment extends Attachable {
+public abstract class SelectableAttachment extends Attachment {
     protected int x;
     protected int y;
     protected boolean selected;

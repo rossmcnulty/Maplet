@@ -44,14 +44,14 @@ public final class Triangle extends Shape {
     }
 
     @Override
-    public boolean intersects(int x, int y) {
-        return false;
-    }
-
-    @Override
-    public void render(Map map) {
+    public void draw(Map map) {
         map.drawLine(firstX, firstY, secondX, secondY, color);
         map.drawLine(secondX, secondY, thirdX, thirdY, color);
         map.drawLine(thirdX, thirdY, firstX, firstY, color);
+    }
+
+    @Override
+    public boolean intersects(int x, int y) {
+        return false;
     }
 }

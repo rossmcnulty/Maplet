@@ -36,15 +36,15 @@ public final class Rectangle extends Shape {
     }
 
     @Override
-    public boolean intersects(int x, int y) {
-        return false;
-    }
-
-    @Override
-    public void render(Map map) {
+    public void draw(Map map) {
         map.drawLine(x, y, x, y + height, color);
         map.drawLine(x, y + height, x + width, y + height, color);
         map.drawLine(x + width, y + height, x + width, y, color);
         map.drawLine(x + width, y, x, y, color);
+    }
+
+    @Override
+    public boolean intersects(int x, int y) {
+        return false;
     }
 }

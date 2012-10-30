@@ -2,14 +2,14 @@ package net.apunch.maplet.api.menu;
 
 import net.apunch.maplet.api.Map;
 import net.apunch.maplet.api.MapColor;
-import net.apunch.maplet.api.attachment.Attachable;
+import net.apunch.maplet.api.attachment.Attachment;
+import net.apunch.maplet.api.attachment.Label;
 import net.apunch.maplet.api.attachment.SelectableAttachment;
 
 /**
  * Represents a menu that is displayed on a map.
  */
-public abstract class Menu extends Attachable {
-    private final String title;
+public abstract class Menu extends Attachment {
     private Menu parent;
     private int selectedIndex = -1;
     private SelectableAttachment selected;
@@ -21,7 +21,7 @@ public abstract class Menu extends Attachable {
      *            Title to assign to this menu
      */
     public Menu(String title) {
-        this.title = title;
+        addAttachment(new Label(title, 50 - title.length(), 5, MapColor.DARK_GRAY));
     }
 
     public final void cycleSelected(Map map, int direction) {
@@ -50,13 +50,6 @@ public abstract class Menu extends Attachable {
 
             setSelectedAttachment(map, selected);
         }
-    }
-
-    @Override
-    public void render(Map map) {
-        map.drawText(title, 50 - title.length(), 5, MapColor.DARK_GRAY);
-
-        super.render(map);
     }
 
     /**

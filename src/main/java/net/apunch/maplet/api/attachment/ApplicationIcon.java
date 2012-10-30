@@ -62,10 +62,10 @@ public final class ApplicationIcon extends SelectableAttachment {
     }
 
     @Override
-    public void render(Map map) {
+    public void draw(Map map) {
         map.drawImage(x, y, image);
 
-        super.render(map); // Render rectangle border after image icon
+        super.draw(map);
     }
 
     /**
