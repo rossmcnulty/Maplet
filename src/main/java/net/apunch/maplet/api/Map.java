@@ -182,7 +182,7 @@ public final class Map {
     }
 
     /**
-     * Gets this map's active meny.
+     * Gets this map's active menu.
      * 
      * @return Map's active menu, or null if there is not an active menu.
      */

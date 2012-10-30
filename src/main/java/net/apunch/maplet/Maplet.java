@@ -151,24 +151,29 @@ public final class Maplet extends JavaPlugin implements Listener {
      * Creates a new {@link Map} from the given item.
      * 
      * @param map
-     *            Map item associated with this maplet.
+     *            Map item associated with this map.
      * 
-     * @return Newly created maplet.
+     * @return Newly created map.
      */
     public static Map createMap(ItemStack mapItem) {
         short id = mapItem.getDurability();
         Map map = new Map(id);
-        maps.put(id, map);
+        MapletCreateEvent event = new MapletCreateEvent(map);
+        Bukkit.getPluginManager().callEvent(event);
 
-        // Remove the map's default renderers
-        MapView view = Bukkit.getMap(id);
-        for (MapRenderer renderer : view.getRenderers()) {
-            view.removeRenderer(renderer);
+        if (!event.isCancelled()) {
+            maps.put(id, map);
+
+            // Remove the map's default renderers
+            MapView view = Bukkit.getMap(id);
+            for (MapRenderer renderer : view.getRenderers()) {
+                view.removeRenderer(renderer);
+            }
+
+            return map;
         }
 
-        Bukkit.getPluginManager().callEvent(new MapletCreateEvent(map));
-
-        return map;
+        return null;
     }
 
     /**
@@ -240,7 +245,7 @@ public final class Maplet extends JavaPlugin implements Listener {
                 Plugin plugin;
                 try {
                     plugin = Bukkit.getPluginManager().loadPlugin(file);
-                    if (!plugin.getClass().isAssignableFrom(Application.class)) {
+                    if (!Application.class.isAssignableFrom(plugin.getClass())) {
                         throw new Exception("Plugin's main class is not an Application.");
                     }
 
