@@ -6,21 +6,20 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_4_6.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.map.MapPalette;
 
 import net.apunch.maplet.api.menu.MainMenu;
 import net.apunch.maplet.api.menu.Menu;
-import net.minecraft.server.Packet131ItemData;
+import net.minecraft.server.v1_4_6.Packet131ItemData;
 
 /**
  * Represents a map that can be drawn to.
  */
 public final class Map {
     private final byte[] pixels = new byte[128 * 128];
-    // private final byte[][] data = new byte[128][131];
     private final Set<Player> viewers = new HashSet<Player>();
     private final short id;
     private Menu activeMenu;
@@ -179,7 +178,7 @@ public final class Map {
             // Send all changed columns to viewers
             for (Player player : viewers) {
                 for (Packet131ItemData packet : changed) {
-                    ((CraftPlayer) player).getHandle().netServerHandler.sendPacket(packet);
+                    ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
                 }
             }
         }

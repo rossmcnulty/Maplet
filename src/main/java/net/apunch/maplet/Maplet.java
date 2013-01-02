@@ -17,10 +17,11 @@ import net.apunch.maplet.api.event.MapletCreateEvent;
 import net.apunch.maplet.api.menu.Menu;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.CraftServer;
+import org.bukkit.craftbukkit.v1_4_6.CraftServer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,6 +30,7 @@ import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
@@ -46,6 +48,10 @@ public final class Maplet extends JavaPlugin implements Listener {
         Player player = (Player) sender;
         if (args.length == 1 && args[0].equalsIgnoreCase("create")) {
             ItemStack map = new ItemStack(Material.MAP, 1, getServer().createMap(player.getWorld()).getId());
+            ItemMeta meta = map.getItemMeta();
+            meta.setDisplayName(ChatColor.RED + "Test");
+            map.setItemMeta(meta);
+
             player.getInventory().addItem(map);
             createMap(map);
             player.sendMessage("Created map with id '" + map.getDurability() + "'.");
